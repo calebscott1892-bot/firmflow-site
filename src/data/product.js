@@ -133,6 +133,7 @@ export const content = {
   heroAccent: 'professional firms',
   heroTrail: '.',
   heroNote: 'Start free · source-grounded · disclaimers built in',
+  heroMetaTag: 'Source-grounded',
 
   problemEyebrow: 'The reality',
   problemHeadline: 'Your expertise builds trust — if anyone ever sees it.',
