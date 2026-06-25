@@ -113,8 +113,9 @@ export const product = {
       ],
     },
   ],
-  // Direct Stripe one-time checkout (from C4 productData LIFETIME_LINKS).
-  lifetime: { price: 890, href: 'https://buy.stripe.com/00w4gz1CMdbC4ABgD63ZK0k' },
+  // Matches C4 productData lifetime.href — routes to the suite app, which handles
+  // lifetime checkout + grants access on payment. (Raw Stripe LIFETIME_LINKS are archived.)
+  lifetime: { price: 890, href: `${SUITE_APP_URL}?ref=firmflow-lifetime` },
   pricing: 'Starter $39/mo · Pro $89/mo. Start free — paid plans unlock inside the app.',
 
   ctaHref: `${SUITE_APP_URL}?ref=firmflow`,
