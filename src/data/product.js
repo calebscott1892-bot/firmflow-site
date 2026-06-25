@@ -164,6 +164,8 @@ export const content = {
     'FirmFlow turns the material you already have into a steady stream of trustworthy content — in your voice, with the guardrails your industry needs.',
 
   socialHeadline: 'Built for firms that win on trust',
+  // Flip to true + add a real `name` to each testimonial below to ship real social proof.
+  testimonialsAreReal: false,
   testimonials: [
     { quote: 'I paste in an ATO update and get a LinkedIn post in our voice. What took an hour takes two minutes.', role: 'Accounting partner' },
     { quote: 'The source-first part is why I trust it. It won’t invent a case or a figure — it only uses what I give it.', role: 'Law firm principal' },
