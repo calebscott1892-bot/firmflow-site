@@ -28,6 +28,9 @@
   --accent-line: rgba(91, 70, 201, 0.30);
   --accent-ink: #ffffff; /* text on the accent (buttons) */
 
+  /* ── Single success-green — used only for confirmations ── */
+  --ok: #1f9d63;
+
   /* ── Borders ── */
   --border: #dddbd7;
   --border-light: #eceae6;
