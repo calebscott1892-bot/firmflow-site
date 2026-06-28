@@ -188,5 +188,5 @@ export const seo = {
     'FirmFlow generates on-brand LinkedIn posts, newsletters and client emails for accounting, legal and consulting firms — grounded in your own source material, in your voice, with disclaimers built in. A C4 Studios product.',
   url: product.siteUrl,
   ogImage: `${product.siteUrl}/og.png`,
-  themeColor: '#0f1115',
+  themeColor: '#f7f5f2',
 };
