@@ -121,6 +121,49 @@ function esc(str = '') {
     .replace(/"/g, '&quot;');
 }
 
+/**
+ * Per-page <head> for a programmatic-SEO landing page.
+ * Unique title / description / canonical + FAQPage + BreadcrumbList JSON-LD.
+ */
+export function renderLandingHead(landing) {
+  const origin = new URL(seo.url).origin;
+  const canonical = `${origin}/${landing.path}`;
+  const schemas = [
+    faqSchema(landing.faqs),
+    breadcrumbSchema([
+      { name: 'C4 Studios', url: ORG.url },
+      { name: product.name, url: seo.url },
+      { name: landing.breadcrumbName, url: canonical },
+    ]),
+  ];
+  const tags = [
+    `<title>${esc(landing.title)}</title>`,
+    `<meta name="description" content="${esc(landing.metaDescription)}" />`,
+    `<meta name="theme-color" content="${seo.themeColor}" />`,
+    `<link rel="canonical" href="${canonical}" />`,
+    // Open Graph
+    `<meta property="og:type" content="article" />`,
+    `<meta property="og:site_name" content="${esc(product.name)}" />`,
+    `<meta property="og:title" content="${esc(landing.title)}" />`,
+    `<meta property="og:description" content="${esc(landing.metaDescription)}" />`,
+    `<meta property="og:url" content="${canonical}" />`,
+    `<meta property="og:image" content="${seo.ogImage}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${esc(landing.title)}" />`,
+    `<meta property="og:locale" content="en_AU" />`,
+    // Twitter
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:title" content="${esc(landing.title)}" />`,
+    `<meta name="twitter:description" content="${esc(landing.metaDescription)}" />`,
+    `<meta name="twitter:image" content="${seo.ogImage}" />`,
+    `<meta name="twitter:image:alt" content="${esc(landing.title)}" />`,
+    // JSON-LD
+    `<script type="application/ld+json">${JSON.stringify(schemas)}</script>`,
+  ];
+  return tags.join('\n    ');
+}
+
 /** Returns the full <head> tag string injected by the prerender script. */
 export function renderHead() {
   const tags = [

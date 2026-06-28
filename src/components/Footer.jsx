@@ -1,6 +1,10 @@
 import React from 'react';
 import { product, content } from '../data/product.js';
+import { landings } from '../data/landings.js';
 import { Container, Motif, ArrowUpRight } from './primitives.jsx';
+
+// Programmatic-SEO landing pages — internal links so they stay crawlable.
+const SOLUTIONS = landings.map((l) => ({ name: l.breadcrumbName, href: `/${l.path}` }));
 
 const FAMILY = [
   { name: 'ReviewLoop', href: 'https://reviewloop.c4studios.com.au' },
@@ -19,7 +23,7 @@ export default function Footer() {
   return (
     <footer className="bg-[color:var(--ink-bg)]">
       <Container className="py-16">
-        <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div>
             <span className="inline-flex items-center gap-2.5">
               <span className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-[3px] bg-white/5">
@@ -40,6 +44,7 @@ export default function Footer() {
             </div>
           </div>
 
+          <FooterCol title="Solutions" links={SOLUTIONS} />
           <FooterCol title="C4 products" links={FAMILY} />
           <FooterCol title="Company" links={COMPANY} />
         </div>
@@ -68,22 +73,27 @@ function FooterCol({ title, links }) {
     <nav aria-label={title}>
       <h3 className="mono text-[10px] font-medium uppercase tracking-[0.2em] text-[color:var(--ink-faint)]">{title}</h3>
       <ul className="mt-4 space-y-2.5">
-        {links.map((l) => (
-          <li key={l.name}>
-            <a
-              href={l.href}
-              target={l.href.startsWith('mailto') ? undefined : '_blank'}
-              rel="noopener noreferrer"
-              aria-current={l.current ? 'page' : undefined}
-              className={`group inline-flex items-center gap-1.5 text-[13.5px] transition-colors ${
-                l.current ? 'font-semibold text-[color:var(--ink-text)]' : 'text-[color:var(--ink-muted)] hover:text-[color:var(--ink-text)]'
-              }`}
-            >
-              {l.name}
-              {!l.href.startsWith('mailto') && <ArrowUpRight size={11} className="opacity-50" />}
-            </a>
-          </li>
-        ))}
+        {links.map((l) => {
+          const isMail = l.href.startsWith('mailto');
+          const isInternal = l.href.startsWith('/');
+          const external = !isMail && !isInternal;
+          return (
+            <li key={l.name}>
+              <a
+                href={l.href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+                aria-current={l.current ? 'page' : undefined}
+                className={`group inline-flex items-center gap-1.5 text-[13.5px] transition-colors ${
+                  l.current ? 'font-semibold text-[color:var(--ink-text)]' : 'text-[color:var(--ink-muted)] hover:text-[color:var(--ink-text)]'
+                }`}
+              >
+                {l.name}
+                {!isMail && <ArrowUpRight size={11} className="opacity-50" />}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
