@@ -39,7 +39,9 @@
   --ink-bg: #1a1a1a;
   --ink-text: #e9e6e0;
   --ink-muted: #9c9a94;
-  --ink-faint: #8d8b83;
+  /* Used (in this site) for small labels on the LIGHT bg, not the dark band —
+     darkened from #8d8b83 to clear WCAG AA 4.5:1 contrast. */
+  --ink-faint: #6e6c61;
   --ink-border: rgba(255, 255, 255, 0.10);
 
   --ring: rgba(26, 26, 26, 0.4);
@@ -133,3 +135,6 @@ a:focus:not(:focus-visible), button:focus:not(:focus-visible) { outline: none; }
 }
 @keyframes caret-blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+
+/* Anchor scroll offset for the 64px sticky header. */
+section[id], #top, #main { scroll-margin-top: 5rem; }
